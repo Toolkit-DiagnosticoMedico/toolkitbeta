@@ -1,0 +1,81 @@
+<ion-view view-title="DIAGNÓSTICO BÁSICO">
+	<ion-content class="margenes-content" ng-controller="RealizarDiag">
+		
+	<div class="centrar">
+		<img src="img/tablagris.png" class="head-img">
+	</div>
+
+		<ul class="list">
+
+		  <li class="item item-toggle">
+		     Ritmo Cardiaco
+		     <label class="toggle toggle-assertive">
+		       <input type="checkbox" ng-model="ritmo">
+		       <div class="track">
+		         <div class="handle"></div>
+		       </div>
+		     </label>
+		  </li>
+
+		  <li class="item item-toggle">
+		     Presión
+		     <label class="toggle toggle-assertive">
+		       <input type="checkbox" ng-model="presion">
+		       <div class="track">
+		         <div class="handle"></div>
+		       </div>
+		     </label>
+		  </li>
+
+		  <li class="item item-toggle">
+		     Glucosa
+		     <label class="toggle toggle-assertive">
+		       <input type="checkbox" ng-model="glucosa">
+		       <div class="track">
+		         <div class="handle"></div>
+		       </div>
+		     </label>
+		  </li>
+
+		  <li class="item item-toggle">
+		     Temperatura
+		     <label class="toggle toggle-assertive">
+		       <input type="checkbox" ng-model="temperatura">
+		       <div class="track">
+		         <div class="handle"></div>
+		       </div>
+		     </label>
+		  </li>
+
+		</ul>
+
+		<div class="centrar">
+				<button class=" button button-small button-assertive  costados-botones" ng-click="realizarDiagnostico()">
+  					Buscar Afiliado
+					</button
+		</div>
+		<div class="card">
+	  	<div class="item item-divider centrar">
+
+		  Resultados del paciente
+		  </div>
+		  <div class="item item-text-wrap">
+		    	  	<p>{{response14}}</p>
+		    	  	<p>{{response15}}</p>
+		    	  	<p>{{response16}}</p>
+		    	  	<p>{{response17}}</p>    	 
+		  </div>
+		  <div class="item item-divider centrar">
+		  hola mundo
+		  </div>
+		</div>
+		<div class="centrar mucho-abajo">
+				<button class=" button button-small button-assertive  costados-botones" ng-click="guardarDiagnostico()">
+  					Registrar Diagnostico
+					</button
+		</div>
+
+
+
+	</ion-content>
+</ion-view>

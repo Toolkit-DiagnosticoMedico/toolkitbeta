@@ -1,0 +1,18 @@
+<ion-tabs class="tabs-striped tabs-background-transparente tabs-color-active-assertive derecha transparente" ng-controller="DestruirVariables">
+
+ 
+  <ion-tab title="Inicio" icon-off="ion-stats-bars" icon-on="ion-stats-bars" ui-sref="tab3.historia">
+    <ion-nav-view name="historial"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab -->
+  <ion-tab title="Buscar" icon-off="ion-medkit" icon-on="ion-medkit" ui-sref="tab3.diag">
+    <ion-nav-view name="realizardiag"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Account Tab -->
+  <ion-tab title=Salir"" icon="ion-ios-search" icon-on="ion-search" ng-click="destruirPaciente()">
+  </ion-tab>
+
+
+</ion-tabs>

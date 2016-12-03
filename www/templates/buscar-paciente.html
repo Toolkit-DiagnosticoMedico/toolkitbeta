@@ -1,0 +1,22 @@
+<ion-view view-title="BUSCAR PACIENTE" class="fondo">
+	
+	<ion-content class="margenes-content" ng-controller="BuscarAfiliado">	
+			<div class="centrar">
+				<img src="img/paciente3.jpg" class="head-img">
+			</div>	
+				
+			<div class="list list-inset">
+				 <label class="item item-input">
+				   <i class="icon ion-search placeholder-icon"></i>
+				   <input type="text" placeholder="Buscar por correo electronico" ng-model="data.emailpaciente">
+				 </label>
+			</div>
+			<div class="centrar">
+				<button class=" button button-small button-assertive  costados-botones espacio-arriba-abajo" ng-click="buscarPaciente()">
+  					Buscar Afiliado
+					</button>
+			</div>
+
+	</ion-content>
+
+</ion-view>

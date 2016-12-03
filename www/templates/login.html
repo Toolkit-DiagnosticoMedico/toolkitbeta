@@ -1,0 +1,55 @@
+<ion-view view-title="Toolkit Login" class="fondo">
+	<ion-content  scroll="false"  ng-controller="IniciarSesion" >
+
+		<ion-slides options="options" slider="data.slider">
+			<ion-slide-page>
+
+				<div class="img-mediana centrar full-ancho espacio-arriba-abajo">
+					<img src="img/avatars.png">
+				</div>
+
+				<form  class="centrar">
+					<h4 class="titulo-login-rojo">Asistentes</h4>
+					<label class="item item-input item-stacked-label espacio-derecha-izquierda">
+				    <span class="input-label">E-mail</span>
+				    <input class="centrar" type="text" placeholder="usuario-enfermero@gmail.com" ng-model="data.email">
+				  </label>
+				  <label class="item item-input item-stacked-label espacio-derecha-izquierda">
+				    <span class="input-label">Contraseña</span>
+				    <input class=" centrar" type="password" placeholder="*************" ng-model="data.contrasena">
+				  </label>
+				  
+				  	<button class="button button-small button-assertive espacio-arriba-abajo espacio-derecha-izquierda costados-botones" ng-click="submit()">
+  					Iniciar Sesión
+					</button>
+
+				</form>
+
+			</ion-slide-page>
+			<ion-slide-page>
+				<div class="img-mediana centrar full-ancho espacio-arriba-abajo">
+					<img src="img/avatars2.png">
+				</div>
+
+				<form class="centrar">
+					<b><h4 class="titulo-login-azul">Afiliados</h4></b>
+					<label class="item item-input item-stacked-label espacio-derecha-izquierda">
+				    <span class="input-label">E-mail</span>
+				    <input class="centrar" type="text" placeholder="usuario-afiliado@gmail.com" ng-model="data.email2">
+				  </label>
+				  <label class="item item-input item-stacked-label espacio-derecha-izquierda">
+				    <span class="input-label">Contraseña</span>
+				    <input class=" centrar" type="password" placeholder="*************" ng-model="data.contrasena2">
+				  </label>
+				  
+				  	<button class="button button-small button-positive espacio-arriba-abajo espacio-derecha-izquierda costados-botones" type="submit" ng-click="submit2()">
+  					Iniciar Sesión
+					</button>
+
+				</form>
+			</ion-slide-page>
+		</ion-slides>
+		
+	</ion-content>
+
+</ion-view>
