@@ -361,8 +361,6 @@ angular.module('starter', ['ionic','ngStorage','ion-datetime-picker'])
 
 .controller('RealizarDiag',function($scope, $http, $sessionStorage, $ionicPopup, $window){
 
-//all toggles whit value = true
-
   $scope.ritmo = true;  
   $scope.presion = true;  
   $scope.glucosa = true;  
@@ -371,154 +369,127 @@ angular.module('starter', ['ionic','ngStorage','ion-datetime-picker'])
 
   $scope.realizarDiagnostico = function(){
 
-  $sessionStorage.miritmo = '0';
-  $sessionStorage.mipresion = '0';
-  $sessionStorage.miglucosa = '0';
-  $sessionStorage.mitemperatura = '0'; 
+    var link30 = 'http://192.168.6.30/hardcontrol.php';
 
-  
-
-    if ($scope.ritmo === true) {
-        
-      var link14 = 'http://192.168.6.30/tomar-ritmo.php';
-
-        $http.post(link14, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
-        then(function (res14){
-          
-            $scope.response14 = res14.data;
-            var valor1 = $scope.response14;
-            if (valor1 === '') {
-                $sessionStorage.rr = 1;
-                var rr1 = $sessionStorage.rr;
-                $window.sessionStorage.removeItem('ngStorage-rr');
-            }else{
-              $sessionStorage.rr = 0;
-            }
-        });
-
-    }else{
-        
-         $sessionStorage.miritmo = 1;
-        $scope.response14='';
-    }
-    if ($scope.presion === true) {
-
-      var link15 = 'http://192.168.6.30/tomar-presion.php';
-
-        $http.post(link15, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
-        then(function (res15){
+        $http.post(link30, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
+        then(function (res30){
             
-            $scope.response15 = res15.data;
-            var valor2 = $scope.response15;
-            if (valor2 === '') {
-                $sessionStorage.rp = 1;
-                 var rp1 = $sessionStorage.rp;
-                $window.sessionStorage.removeItem('ngStorage-rp');
+            $scope.response30 = res30.data;
+
+            if ($scope.response30 === 'continua') {
+
+            /**********************************************RITMO*****************************************************/
+                if ($scope.ritmo === true) {
+                    
+                    var link14 = 'http://192.168.6.30/tomar-ritmo.php';
+
+                    $http.post(link14, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
+                    then(function (res14){
+                        
+                        $scope.response14 = res14.data; 
+                    });
+
+                }else{
+
+                     $scope.response14='';
+                }
+            /*********************************************PRESION*****************************************************/
+                if ($scope.presion === true) {
+
+                  var link15 = 'http://192.168.6.30/tomar-presion.php';
+
+                    $http.post(link15, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
+                    then(function (res15){
+
+                        $scope.response15 = res15.data;
+                    });
+                    
+                }else{
+
+                    $scope.response15='';
+                }
+
+            /*********************************************GLUCOSA*****************************************************/
+                if ($scope.glucosa === true) {
+
+                  var link16 = 'http://192.168.6.30/tomar-glucosa.php';
+
+                    $http.post(link16, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
+                    then(function (res16){
+
+                        $scope.response16 = res16.data;
+
+                    });
+                    
+                }else{
+
+                    $scope.response16='';
+                }
+
+            /*********************************************TEMPERATURA*****************************************************/
+                if ($scope.temperatura === true) {
+
+                  var link17 = 'http://192.168.6.30/tomar-temperatura.php';
+
+                    $http.post(link17, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
+                    then(function (res17){
+
+                        $scope.response17 = res17.data;
+                    });
+                    
+                }else{
+
+                    $scope.response17='';
+                }
+
+
+            /************************************* Alert false toggle ***************************************************************/
+
+                if ($scope.ritmo === false && $scope.presion === false && $scope.glucosa === false && $scope.temperatura === false) {
+
+                    $sessionStorage.regresar ='1';
+                    var togglevacio = $ionicPopup.alert({
+                           title: '<b>Alerta</b>',
+                           template: '<p> No selecciono ningun diagnostico, debe seleccionar almenos uno para obtener un resultado </p>',
+                          
+                           buttons:   [
+                                        {
+                                          text:'Aceptar',
+                                          type: 'button-dark',
+                                        }
+                                      ]
+                             });
+                }
+                if ($scope.response14 !='' || $scope.response15 != '' || $scope.response16 != '' || $scope.response17 != '' ) {
+                    $sessionStorage.regresar ='0';
+
+                }
+
+
             }else{
-              $sessionStorage.rp = 0;
+
+                  $sessionStorage.regresar = '1';
+                  var alertacosulta = $ionicPopup.alert({
+                           title: '<b>Alerta</b>',
+                           template: '<p>Error al obtener el diagnostico, intente nuevamente o revise la conexion con el hardware </p>',
+                          
+                           buttons:   [
+                                        {
+                                          text:'Aceptar',
+                                          type: 'button-dark',
+                                        }
+                                      ]
+                             });
+
             }
+
         });
-        
-    }else{
-        
-        $sessionStorage.mipresion = 1;
-        $scope.response15='';
-    }
-    if ($scope.glucosa === true) {
-
-      var link16 = 'http://192.168.6.30/tomar-glucosa.php';
-
-        $http.post(link16, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
-        then(function (res16){
-            
-            $scope.response16 = res16.data;
-            var valor3 = $scope.response16;
-            if (valor3 === '') {
-                $sessionStorage.rg = 1;
-                 var rg1 = $sessionStorage.rg;
-                $window.sessionStorage.removeItem('ngStorage-rg');
-            }else{
-              $sessionStorage.rg = 0;
-            }
-        });
-        
-    }else{
-    
-        $sessionStorage.miglucosa = 1;
-        $scope.response16='';
-    }
-    if ($scope.temperatura === true) {
-
-      var link17 = 'http://192.168.6.30/tomar-temperatura.php';
-
-        $http.post(link17, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
-        then(function (res17){
-          
-            $scope.response17 = res17.data;
-            var valor4 = $scope.response17;
-            if (valor4 === '') {
-                $sessionStorage.rt = 1;
-                 var rt1 = $sessionStorage.rt;
-                $window.sessionStorage.removeItem('ngStorage-rt');
-            }else{
-              $sessionStorage.rt = 0;
-            }
-        });
-        
-    }else{
-        
-        $sessionStorage.mitemperatura = 1;
-        $scope.response17='';
-    }
 
 
-
-     if ($sessionStorage.miritmo === '1' && $sessionStorage.mipresion ==='1' && $sessionStorage.miglucosa ==='1' && $sessionStorage.mitemperatura ==='1') {
-
-        var error1 = $ionicPopup.alert({
-               title: '<b>Error</b>',
-               scope: $scope,
-               template: 'No selecciono ninguna operacion, debe seleccionar almenos uno para obtener resultados',
-              
-               buttons:   [
-                            {
-                              text:'Aceptar',
-                              type: 'button-dark',
-                            }
-                          ]
-                 });
-
-    
-      }
-
-    if ($sessionStorage.rr === 1 && $sessionStorage.rp ===1 && $sessionStorage.rg ===1 && $sessionStorage.rt ===1) {
-
-          var error2 = $ionicPopup.alert({
-                 title: '<b>Error</b>',
-                 scope: $scope,
-                 template: 'No se pudo obtener el diagnostico, intente de nuevo o verifique la conexion con el dispositivo hardware',
-                
-                 buttons:   [
-                              {
-                                text:'Aceptar',
-                                type: 'button-dark',
-                              }
-                            ]
-                   });
-                
-        
-}
-
-    /*
-    var link18 = 'http://192.168.6.30/registrar-diagnostico.php';
-
-        $http.post(link18, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
-        then(function (res18){
-            $scope.response18 = res18.data;
-        });
-    */
 
   };
+
+/*************************************Funcion guardarDiagnostico ********************************************************/
 
   $scope.guardarDiagnostico = function(){
 
@@ -527,6 +498,15 @@ angular.module('starter', ['ionic','ngStorage','ion-datetime-picker'])
         $http.post(link18, {email: $sessionStorage.mipaciente, email2: $sessionStorage.miusuario}).
         then(function (res18){
            $scope.response18 = res18.data;
+           if ($scope.response18 === 'No se realizo ningun diagnostico, ¡no se puede almacnar informacion!') {
+                $sessionStorage.regresar ='0';
+           }else{
+              $scope.response14 = '';
+              $scope.response15 = '';
+              $scope.response16 = '';
+              $scope.response17 = '';
+              $sessionStorage.regresar ='1';
+           }
               
             var registrardiagnostivco = $ionicPopup.alert({
                title: '<b>Registrando Diagnostico</b>',
@@ -550,18 +530,36 @@ angular.module('starter', ['ionic','ngStorage','ion-datetime-picker'])
 
 })
 
-.controller('DestruirVariables',function($scope, $state, $window){
+.controller('DestruirVariables',function($scope, $state, $window, $sessionStorage, $ionicPopup){
 
   $scope.destruirPaciente = function(){
-    $window.sessionStorage.removeItem('ngStorage-mipaciente');
-    $state.go('tab.buscarp');
-  }
+
+    if ($sessionStorage.regresar ==='1') {
+
+        $state.go('tab.buscarp');
+        $window.sessionStorage.removeItem('ngStorage-mipaciente');
+    }else{
+         var noregresa = $ionicPopup.alert({
+               title: '<b>Alerta</b>',
+               template: '<p>No ha guardado el diagnostico regresado, debe guardarlo para continuar</p>',
+              
+               buttons:   [
+                            {
+                              text:'Aceptar',
+                              type: 'button-dark',
+
+                            }
+                          ]
+                 });
+    }
+
+  };
 
 
   $scope.destruirUsuario = function(){
     $window.sessionStorage.removeItem('ngStorage-miusuario');
     $state.go('login');
-  }
+  };
 
 
 })
